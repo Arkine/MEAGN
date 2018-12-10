@@ -1,7 +1,10 @@
 const Express = require('express');
 const path = require('path');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const express_graphql = require('express-graphql');
+// const bodyParser = require('body-parser');
+
+const rootSchema = require('./routes/api/rootSchema');
 
 const app = new Express();
 
@@ -17,7 +20,13 @@ app.use(Express.urlencoded({
 app.use(Express.json());
 
 // Routing
-app.use('/', Routes);
+// app.use('/', Routes);
+
+// Graphql
+app.use('/graphql', express_graphql({
+    schema: rootSchema,
+    graphiql: true
+}));
 
 // Where our static files are served from
 app.use("/static", Express.static(path.join(__dirname, '../../build/static')));
