@@ -1,19 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
 import {Navigation} from './PrimaryNavigationStyled';
 
 import links from './links';
 
-const mapStateToProps = state => {
-	return {
-		auth: state.auth
-	}
-}
-
-@connect(mapStateToProps, null, null, {
-	pure: false
-})
 export default class PrimaryNavigation extends React.Component {
 	renderLinks(linkSet) {
 		return linkSet.map((link, i) => (
