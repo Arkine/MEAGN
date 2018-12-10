@@ -1,7 +1,7 @@
 import React from 'react';
 import {ThemeProvider} from 'styled-components';
 import {Router} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {Normalize} from 'styled-normalize';
 
 import history from 'app/services/history';
 
@@ -10,22 +10,10 @@ import theme from './appTheme';
 import Header from 'app/components/common/Header';
 import Footer from 'app/components/common/Footer';
 import Body from 'app/components/common/Body';
-
 import Routes from 'app/components/routes/Routes';
-
 import {LoadingSpinner} from 'app/components/loading';
-
 import BaseStyles from 'app/components/common/BaseStyles';
-import {Normalize} from 'styled-normalize';
 
-
-const mapStateToProps = state => {
-	return {
-		auth: state.auth
-	}
-}
-
-@connect(mapStateToProps)
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
