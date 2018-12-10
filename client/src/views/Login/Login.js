@@ -1,10 +1,5 @@
 import React from 'react';
 
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-
-import {login} from 'app/ducks/auth';
-
 import {Container} from './LoginStyled';
 import {
 	Form,
@@ -14,18 +9,6 @@ import {
 } from 'app/components/form';
 import { Button } from '../../components/common/Button';
 
-const mapStateToProps = state => {
-	return {
-		auth: state.auth
-	}
-}
-
-const mapDispatchToProps = dispatch => (bindActionCreators({
-	login
-}, dispatch));
-
-
-@connect(mapStateToProps, mapDispatchToProps)
 export default class Login extends React.Component {
 	constructor(props) {
 		super(props);

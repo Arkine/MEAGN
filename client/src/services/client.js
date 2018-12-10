@@ -1,5 +1,5 @@
-import {ApolloCLient} from 'apollo-boost';
+import ApolloClient from 'apollo-boost';
 
-export default ApolloCLient({
+export default new ApolloClient({
     uri: `http://localhost:5000`
 });

@@ -8,8 +8,6 @@ const rootSchema = require('./routes/api/rootSchema');
 
 const app = new Express();
 
-const Routes = require('./routes');
-
 app.use(cors());
 
 app.use(Express.urlencoded({
