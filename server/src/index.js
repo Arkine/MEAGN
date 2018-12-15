@@ -46,4 +46,14 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
 });
 
+// Error handler
+const errorHandler = (err, req, res, next) => {
+    if (res.headersSent) {
+      return next(err);
+    }
+    const { status } = err;
+    res.status(status).json(err);
+  };
+app.use(errorHandler);
+
 module.exports = app;

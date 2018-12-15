@@ -3,11 +3,16 @@ import React from 'react';
 import { Container } from './StyledHome';
 
 import transitionRoute from 'app/decorators/transitionRoute';
+import withData from 'app/decorators/withData';
 import {fadeFromTop} from 'app/services/animations/transition';
 
+import {ALL_USERS} from 'app/queries/users';
+
 @transitionRoute(fadeFromTop)
+@withData(ALL_USERS)
 export default class Home extends React.PureComponent {
 	render() {
+		console.log('hp', this.props);
 		return (
 			<Container>
 				<h1>Home</h1>
