@@ -1,6 +1,7 @@
-const GraphQLSchema = require('graphql').GraphQLSchema;
+const userResolvers = require('./types/user').resolvers;
+const User = require('./types/user').typeDef;
 
-
-module.exports = new GraphQLSchema({
-
-});
+module.exports = {
+    typeDefs: [userResolvers],
+    resolvers: {...User}
+}
