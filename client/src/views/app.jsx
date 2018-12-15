@@ -15,6 +15,18 @@ import {LoadingSpinner} from 'app/components/loading';
 import BaseStyles from 'app/components/common/BaseStyles';
 
 export default class App extends React.Component {
+	static defaultProps = {
+		auth: {
+			isAuthenticated: false
+		}
+	}
+
+	state = {
+		loading: true,
+		isAuthenticated: false,
+		appAuthenticated: false,
+	}
+
 	constructor(props) {
 		super(props);
 

@@ -5,6 +5,12 @@ import {Navigation} from './PrimaryNavigationStyled';
 import links from './links';
 
 export default class PrimaryNavigation extends React.Component {
+	static defaultProps = {
+		auth: {
+			isAuthenticated: false
+		}
+	}
+
 	renderLinks(linkSet) {
 		return linkSet.map((link, i) => (
 			<Navigation.Link 

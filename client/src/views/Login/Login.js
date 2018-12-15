@@ -10,14 +10,14 @@ import {
 import { Button } from '../../components/common/Button';
 
 export default class Login extends React.Component {
-	constructor(props) {
-		super(props);
-
-
-		this.state = {
-			errors: {},
-			isLoading: false
+	static defaultProps = {
+		auth: {
+			isAuthenticated: false
 		}
+	}
+	state = {
+		errors: {},
+		isLoading: false
 	}
 
 	componentDidUpdate() {

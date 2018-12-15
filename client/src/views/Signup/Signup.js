@@ -9,13 +9,9 @@ import {
 } from 'app/components/form';
 
 export default class Signup extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			errors: {},
-			isLoading: false
-		};
+	state = {
+		errors: {},
+		isLoading: false
 	}
 
 	handleFormSubmit = e => {

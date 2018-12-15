@@ -7,4 +7,4 @@ projects:
     schemaPath: routes/api/rootSchema.js
     extensions:
       endpoints:
-        default: http://localhost:5000
+        default: http://localhost:4000
