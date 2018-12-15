@@ -1,4 +1,7 @@
 type User {
   id: ID! @id
   name: String!
+  username: String! @unique
+  avatar: String
+  signedUp: Int
 }
