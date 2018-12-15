@@ -5,7 +5,7 @@ const express_graphql = require('express-graphql');
 
 // const bodyParser = require('body-parser');
 
-const rootSchema = require('./routes/api/rootSchema');
+const rootSchema = require('./graphql/rootSchema');
 
 const app = new Express();
 
