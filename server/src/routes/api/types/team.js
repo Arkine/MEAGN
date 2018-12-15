@@ -2,16 +2,13 @@ const GraphQLObjectType = require('graphql').GraphQLObjectType;
 const GraphQLString = require('graphql').GraphQLString;
 const GraphQLInt = require('graphql').GraphQLInt;
 
-exports.User = new GraphQLObjectType({
-	name: 'User',
-	description: 'A Usern',
+exports.Team = new GraphQLObjectType({
+	name: 'Team',
+	description: 'A teamn',
 	fields: {
 		name: {
 			type: GraphQLString
-        },
-        username: {
-            type: GraphQLString
-        },
+		},
 		avatar: {
 			type: GraphQLString
         },
@@ -21,15 +18,5 @@ exports.User = new GraphQLObjectType({
 		error: {
 			type: GraphQLString
 		}
-	}
-});
-
-exports.UserAuth = new GraphQLObjectType({
-	name: 'AuthInput',
-	description: 'User auth',
-	fields: {
-		token: {
-            type: GraphQLString
-        }
 	}
 });

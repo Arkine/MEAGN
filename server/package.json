@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "prisma:build": "prisma deploy --watch"
+    "prisma:deploy": "prisma deploy --watch"
   },
   "author": "",
   "license": "ISC",

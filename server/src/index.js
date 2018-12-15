@@ -28,12 +28,12 @@ app.use('/graphql', express_graphql({
     graphiql: isDev,
     ctx: req => ({
         ...req,
-        auth: () => {},
         db: new Prisma({
             typeDefs: './database/generated/prisma.graphql',
             endpoint: process.env.PRISMA_ENDPOINT,
             secret:  process.env.SECRET,
-            debug: isDev
+            debug: isDev,
+            disableAuth: true
         }),
     }),
 }));

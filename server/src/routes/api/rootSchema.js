@@ -1,7 +1,12 @@
-const userResolvers = require('./types/user').resolvers;
-const User = require('./types/user').typeDef;
+const GraphQLSchema = require('graphql').GraphQLSchema;
 
-module.exports = {
-    typeDefs: [userResolvers],
-    resolvers: {...User}
-}
+const types = require('./types/rootTypes');
+
+const query = require('./resolvers/rootQuery');
+const mutation = require('./mutations/rootMutation');
+
+module.exports = new GraphQLSchema({
+	query,
+	mutation,
+	types
+});
