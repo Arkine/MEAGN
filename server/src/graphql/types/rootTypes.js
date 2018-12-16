@@ -1,4 +1,5 @@
-const User = require('./user').User;
-const Team = require('./team').Team;
-
-module.exports = [User, Team];
+const User = require('./user');
+console.log({...User})
+module.exports = [
+    User,
+];

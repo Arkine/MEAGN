@@ -1,10 +1,10 @@
 const GraphQLObjectType = require('graphql').GraphQLObjectType;
 
-const team = require('./team');
+const user = require('./user');
 
 module.exports = new GraphQLObjectType({
 	name: 'Mutation',
 	fields: {
-		...team
+		...user
 	}
 });

@@ -5,10 +5,3 @@ type User {
   avatar: String
   signedUp: Int
 }
-
-type Team {
-  id: ID! @id
-  name: String! @unique
-  avatar: String
-  signedUp: Int
-}

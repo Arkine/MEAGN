@@ -7,7 +7,7 @@ Building a re-usable full-stack so that I can start new projects faster. In prog
 - Create User password logic
 - Create server fetching pattern
 - Apollo middleware (auth)
-- 
+- Apollo error handling
 
 ### Server
 - Create JWT Auth middlware
