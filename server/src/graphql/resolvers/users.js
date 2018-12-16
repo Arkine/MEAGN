@@ -1,6 +1,3 @@
-const mongoose = require('mongoose');
-const GraphQLID = require('graphql').GraphQLID;
-
 const UserAuth = require('../types/user').UserAuth;
 
 module.exports = {
