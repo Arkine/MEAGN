@@ -1,7 +1,7 @@
 import React from 'react';
 import {graphql} from 'react-apollo';
 
-const withData  = query => WrappedComponent => {
+const withData  = (query, options = {}) => WrappedComponent => {
     const newC = class extends React.Component {
         render() {
             return <WrappedComponent {...this.props} />
@@ -9,9 +9,7 @@ const withData  = query => WrappedComponent => {
     }
 
     return graphql(query, {
-        props: ({ data }) => ({
-           data
-        })
+        ...options
     })(newC);
 }
 

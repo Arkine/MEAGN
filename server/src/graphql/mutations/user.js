@@ -1,26 +1,74 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 const UserAuth = require('../types/user').UserAuth;
 const UserSignupInput = require('../types/user').UserSignupInput;
-const UserLogin = require('../types/user').UserLogin;
+const UserSignupPayload  = require('../types/user').UserSignupPayload;
+const UserLoginPayload = require('../types/user').UserLoginPayload;
+
+const GraphQLString = require('graphql').GraphQLString;
 
 module.exports = {
     signup: {
-        type: UserSignupInput,
-        resolver: (_, args, context, info) => {
-            console.log('user signup mutation', {...arguments});
-            return null;
+        type: UserSignupPayload,
+        args: {
+            email: {
+                type: GraphQLString,
+            },
+            username: {
+                type: GraphQLString,
+            },
+            password: {
+                type: GraphQLString,
+            },
+        },
+        resolve: async (_, args, context, info) => {
+            const password = await bcrypt.hash(args.password, 10);
+
+            const user = await context.prisma.mutation.createUser({
+                data: {...args, password}
+            });
+
+            console.log('user', user);
+
+            return {
+                id: user.id,
+                token: jwt.sign({userId: user.id}, process.env.JWT_SECRET),
+            }
         }
     },
     login: {
-        type: UserLogin,
-        resolver: (_, args, context, info) => {
-            console.log('user signup mutation', {...arguments});
-            return null;
+        type: UserLoginPayload,
+        args: {
+            email: {
+                type: GraphQLString,
+            },
+            password: {
+                type: GraphQLString,
+            },
+        },
+        resolve: async (_, {email, password}, context, info) => {
+            const user = await context.prisma.query.user({where: {email}});
+            if (!user) {
+                throw new Error(`No such user for email: ${email}`);
+            }
+
+            const valid = await bcrypt.compare(password, user.password);
+            if (!valid) {
+                throw new Error(`Invalid Password`);
+            }
+
+            console.log('returniong me!')
+            return {
+                user,
+                token: jwt.sign({userId: user.id}, process.env.JWT_SECRET)
+            };
         }
     },
     renewToken: {
         type: UserAuth,
         resolver:  (_, args, context, info) => {
-            return null;
+            return 'renewToken';
         }
     }
 }

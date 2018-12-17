@@ -1,5 +1,4 @@
 endpoint: http://localhost:4466
-secret: 'testsecret'
 datamodel: datamodel.prisma
 databaseType: document
 

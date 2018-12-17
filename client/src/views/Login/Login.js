@@ -9,6 +9,15 @@ import {
 } from 'app/components/form';
 import { Button } from '../../components/common/Button';
 
+import withData from 'app/decorators/withData'
+import {LOGIN_USER} from 'app/queries/users';
+
+@withData(LOGIN_USER, {
+	props: ({mutate, data}) => ({
+		login: async ({email, password}) => mutate({variables: {email, password}}),
+		data
+	})
+})
 export default class Login extends React.Component {
 	static defaultProps = {
 		auth: {
@@ -40,7 +49,7 @@ export default class Login extends React.Component {
 			return;
 		}
 
-		await this.props.login(values);
+		console.log(await this.props.login(values));
 	}
 
 	validateForm = values => {
@@ -52,6 +61,7 @@ export default class Login extends React.Component {
 			const val = values[keys[i]];
 		
 			if (val.length < minLen) {
+				console.log('is less', keys[i])
 				errors[keys[i]] = `${keys[i]} must be at least ${minLen} characters in length`;
 			}
 		}
@@ -60,6 +70,7 @@ export default class Login extends React.Component {
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<Container>
 				<Form onSubmit={this.handleFormSubmit} validator={this.validateForm} isLoading={this.props.auth.isFetching}>
@@ -67,9 +78,9 @@ export default class Login extends React.Component {
 					<FormGroup>
 						<TextInput
 							type="text"
-							name="username"
-							error={this.state.errors['username']}
-							label="Username"
+							name="email"
+							error={this.state.errors['email']}
+							label="email"
 							required
 						/>
 

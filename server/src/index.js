@@ -2,10 +2,12 @@ const Express = require('express');
 const path = require('path');
 const cors = require('cors');
 const express_graphql = require('express-graphql');
+const { Prisma } = require('prisma-binding');
 
 // const bodyParser = require('body-parser');
 
 const rootSchema = require('./graphql/rootSchema');
+// const rootSchema = require('./graphql/rootSchema');
 
 const app = new Express();
 
@@ -26,16 +28,15 @@ app.use(Express.json());
 app.use('/graphql', express_graphql({
     schema: rootSchema,
     graphiql: isDev,
-    ctx: req => ({
-        ...req,
-        db: new Prisma({
-            typeDefs: './database/generated/prisma.graphql',
+    context: {
+        prisma: new Prisma({
+            typeDefs: 'src/database/prisma.graphql',
             endpoint: process.env.PRISMA_ENDPOINT,
             secret:  process.env.SECRET,
             debug: isDev,
             disableAuth: true
         }),
-    }),
+    }
 }));
 
 // Where our static files are served from

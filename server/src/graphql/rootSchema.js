@@ -1,7 +1,6 @@
 const GraphQLSchema = require('graphql').GraphQLSchema;
 
 const types = require('./types/rootTypes');
-
 const query = require('./resolvers/rootQuery');
 const mutation = require('./mutations/rootMutation');
 

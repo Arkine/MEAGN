@@ -13,7 +13,5 @@ services:
         databases:
           default:
             connector: mongo
+            database: megn-stack
             uri: 'mongodb://host.docker.internal:27017/megn-stack'
-hooks:
-  post-deploy:
-    - graphql get-schema

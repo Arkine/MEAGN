@@ -8,14 +8,31 @@ import {
 	FormButton
 } from 'app/components/form';
 
+import withData from 'app/decorators/withData';
+import {SIGNUP_USER} from 'app/queries/users';
+
+@withData(SIGNUP_USER, {
+	props: ({mutate, data}) => ({
+		signup: async ({username, email, password}) => mutate({variables: {username, email, password}}),
+		data
+	})
+})
 export default class Signup extends React.Component {
 	state = {
 		errors: {},
 		isLoading: false
 	}
 
-	handleFormSubmit = e => {
-		console.log(e);
+	handleFormSubmit = ({errors, values}) => {
+		if (Object.keys(errors).length) {
+			this.setState({
+				errors,
+			});
+
+			return;
+		}
+
+		this.props.signup(values);
 	}
 
 	validate = values => {
@@ -23,6 +40,7 @@ export default class Signup extends React.Component {
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<Container>
 				<Form
@@ -35,6 +53,14 @@ export default class Signup extends React.Component {
 							type="text"
 							name="username"
 							label="Username"
+							error={this.state.errors['username']}
+							required
+						/>
+
+						<TextInput
+							type="email"
+							name="email"
+							label="Email"
 							error={this.state.errors['username']}
 							required
 						/>
