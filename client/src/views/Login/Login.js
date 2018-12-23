@@ -7,6 +7,7 @@ import {
 	TextInput,
 	FormButton
 } from 'app/components/form';
+import {FormError} from 'app/components/form/FormStyled'
 import { Button } from '../../components/common/Button';
 
 import withData from 'app/decorators/withData'
@@ -26,6 +27,7 @@ export default class Login extends React.Component {
 	}
 	state = {
 		errors: {},
+		formErrors: [],
 		isLoading: false
 	}
 
@@ -48,8 +50,15 @@ export default class Login extends React.Component {
 
 			return;
 		}
+		try {
 
-		console.log(await this.props.login(values));
+			const data = await this.props.login(values);
+			console.log({data});
+		} catch (e) {
+			this.setState({
+				formErrors: e.graphQLErrors
+			})
+		}
 	}
 
 	validateForm = values => {
@@ -73,14 +82,19 @@ export default class Login extends React.Component {
 		console.log(this.props)
 		return (
 			<Container>
-				<Form onSubmit={this.handleFormSubmit} validator={this.validateForm} isLoading={this.props.auth.isFetching}>
+				<Form 
+					onSubmit={this.handleFormSubmit} 
+					validator={this.validateForm} 
+					isLoading={this.props.auth.isFetching}
+				>
 					<h1>Login</h1>
+					{this.state.formErrors.length > 0 && this.state.formErrors.map(error => <FormError><FormError.Message>{error.message}</FormError.Message></FormError>)}
 					<FormGroup>
 						<TextInput
 							type="text"
 							name="email"
 							error={this.state.errors['email']}
-							label="email"
+							label="Email"
 							required
 						/>
 

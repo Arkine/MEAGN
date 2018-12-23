@@ -42,6 +42,9 @@ exports.UserSignupInput = new GraphQLObjectType({
 	name: 'userSignupInput',
 	description: 'Sign up a user',
 	fields: {
+		errors: {
+			type: GraphQLString
+		},
 		email: {
 			type: GraphQLString
 		},
@@ -58,12 +61,9 @@ exports.UserSignupPayload = new GraphQLObjectType({
 	name: 'userSignupPayload',
 	description: 'User signup payload',
 	fields: {
-		id: {
+		errors: {
 			type: GraphQLString
 		},
-		token: {
-			type: GraphQLString
-		}
 	}
 })
 

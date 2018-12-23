@@ -9,5 +9,5 @@ export {
 	FormGroup,
 	TextInput,
 	FormLabel,
-	FormButton
+	FormButton,
 }

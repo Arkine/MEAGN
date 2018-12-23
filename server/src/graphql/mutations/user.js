@@ -24,16 +24,17 @@ module.exports = {
         },
         resolve: async (_, args, context, info) => {
             const password = await bcrypt.hash(args.password, 10);
-
-            const user = await context.prisma.mutation.createUser({
-                data: {...args, password}
-            });
-
-            console.log('user', user);
+            let errors = null;
+            try {
+                await context.prisma.mutation.createUser({
+                    data: {...args, password}
+                });
+            } catch (e) {
+                errors = e.message;
+            }
 
             return {
-                id: user.id,
-                token: jwt.sign({userId: user.id}, process.env.JWT_SECRET),
+                errors: errors,
             }
         }
     },
